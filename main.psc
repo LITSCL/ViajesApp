@@ -104,7 +104,7 @@ Algoritmo main
 					
 					__contador = __contador + 1
 					
-					Si __contador == 3 Entonces
+					Si __contador == 10 Entonces
 						Escribir "!Viaje listo¡"
 						__agregar = Falso
 					SiNo
