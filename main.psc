@@ -12,7 +12,7 @@ Algoritmo main
 	Definir __nombre Como Texto
 	Definir __nacionalidad Como Texto
 	Definir __genero Como Texto
-	Definir __edad Como Numero
+	Definir __edad Como Texto
 	
 	__seguir = Verdadero
 	Mientras __seguir == Verdadero Hacer
@@ -72,10 +72,14 @@ Algoritmo main
 					Mientras __validado == Falso Hacer
 						Escribir "Ingrese la edad del pasajero" , " " , "[" , __contador + 1 , "]" , ": (0/150)"
 						Leer __edad
-						Si 	__edad >= 0 y __edad <= 150 Entonces
-							__validado = Verdadero
+						Si __validar_numero(__edad) == Verdadero Entonces
+							Si ConvertirANumero(__edad) >= 0 y ConvertirANumero(__edad) <= 150 Entonces
+								__validado = Verdadero
+							SiNo
+								Escribir "ERROR: La edad no está dentro del rango"
+							FinSi
 						SiNo
-							Escribir "ERROR: La edad ingresada no es valida"
+							Escribir "ERROR: Debe ingresar un número válido"
 						FinSi
 					FinMientras
 					
@@ -93,13 +97,13 @@ Algoritmo main
 						__cantidad_mujeres = __cantidad_mujeres + 1
 					FinSi
 					
-					Si __edad >= 18 Entonces
+					Si ConvertirANumero(__edad) >= 18 Entonces
 						__cantidad_mayores = __cantidad_mayores + 1
 					SiNo
 						__cantidad_menores = __cantidad_menores + 1
 					FinSi
 					
-					__edad_acumulada = __edad_acumulada + __edad
+					__edad_acumulada = __edad_acumulada + ConvertirANumero(__edad)
 					__cantidad_pasajeros = __cantidad_pasajeros + 1
 					
 					__contador = __contador + 1
@@ -151,6 +155,16 @@ Algoritmo main
 	FinMientras
 	
 FinAlgoritmo
+
+Funcion __validado <- __validar_numero(__numero)
+	__validado = Verdadero
+	Para i = 1 Hasta Longitud(__numero) Con Paso 1 Hacer
+		__v = Subcadena(__numero, i, i)
+		Si __v <> "0" y __v <> "1" y __v <> "2" y __v <> "3" y __v <> "4" y __v <> "5" y __v <> "6" y __v <> "7" y __v <> "8" y __v <> "9" Entonces
+			__validado = Falso
+		FinSi
+	FinPara
+FinFuncion
 
 Funcion __cadena <- __simulacion_trim(__cadena)
 	Mientras Subcadena(__cadena, 1, 1) == " " Hacer
